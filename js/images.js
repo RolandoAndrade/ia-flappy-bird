@@ -6,6 +6,10 @@ const IMAGES=["bgNight","bgDay", "land", "pipeUp", "pipeDown",
 const BG_NIGHT=0;
 const BG_DAY=1;
 const FLOOR=2;
+const GREEN_UP=3;
+const GREEN_DOWN=4;
+const RED_UP=5;
+const RED_DOWN=6;
 
 class ImageLoader
 {
