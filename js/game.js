@@ -81,8 +81,10 @@ class PairPipe
     {
         this.x=WIDTH;
         let y=this.random(150,450);
-        this.top=new TopPipe(this.x,y-50,"GREEN");
-        this.bottom=new BottomPipe(this.x,y+50,"GREEN");
+        let colors=["GREEN","R"];
+        let r=this.random(0,2);
+        this.top=new TopPipe(this.x,y-50,colors[r]);
+        this.bottom=new BottomPipe(this.x,y+50,colors[r]);
     }
 
     move(delta)
@@ -109,6 +111,10 @@ class Background
     {
         this.land=[new Land(0), new Land(1)];
         this.pipes=[];
+    }
+
+    generatePipe()
+    {
         this.pipes.push(new PairPipe());
     }
 
@@ -117,10 +123,7 @@ class Background
         this.land[0].move(delta);
         this.land[1].move(delta);
         if(this.pipes[0].move(delta))
-        {
             this.pipes.shift();
-            this.pipes.push(new PairPipe());
-        }
         for(let i=1;i<this.pipes.length;i++)
             this.pipes[i].move(delta)
 
