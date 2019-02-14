@@ -1,8 +1,3 @@
-const canvas=document.getElementById("canvas");
-const ctx=canvas.getContext("2d");
-const WIDTH=400;
-const HEIGHT=600;
-
 class Land
 {
     constructor(i)
@@ -24,6 +19,14 @@ class Land
         if(this.x<-this.w)
             this.x+=2*this.w;
     }
+
+    collision(player)
+    {
+        if(player.y+PLAYER_RADIUS>=this.y)
+            player.kill(this.y);
+        return !player.isAlive;
+
+    }
 }
 
 class Pipe
@@ -44,7 +47,8 @@ class Pipe
     }
     draw()
     {
-        ImageLoader.drawImage(this.getColor(),this.x,this.y,this.w,this.h)
+        ImageLoader.drawImage(this.getColor(),this.x,this.y,this.w,this.h);
+        ctx.strokeRect(this.x, this.y, this.w, this.h);
     }
 
     move(delta)
@@ -120,12 +124,20 @@ class Background
 
     scroll(delta)
     {
-        this.land[0].move(delta);
-        this.land[1].move(delta);
-        if(this.pipes[0].move(delta))
-            this.pipes.shift();
-        for(let i=1;i<this.pipes.length;i++)
-            this.pipes[i].move(delta)
+        try
+        {
+            this.land[0].move(delta);
+            this.land[1].move(delta);
+            if(this.pipes[0].move(delta))
+                this.pipes.shift();
+            for(let i=1;i<this.pipes.length;i++)
+                this.pipes[i].move(delta)
+        }
+        catch (e)
+        {
+
+        }
+
 
     }
 
@@ -138,12 +150,15 @@ class Background
         this.land[0].draw();
         this.land[1].draw();
     }
+
+    collision(player)
+    {
+        return this.land[0].collision(player)||this.land[1].collision(player);
+    }
+
 }
 
-class Player
-{
 
-}
 
 class Game
 {
