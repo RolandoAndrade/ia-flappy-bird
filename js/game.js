@@ -109,6 +109,7 @@ class PairPipe
         let r=this.random(0,2);
         this.top=new TopPipe(this.x,y-50,colors[r]);
         this.bottom=new BottomPipe(this.x,y+50,colors[r]);
+        this.isPointed=false;
     }
 
     move(delta)
@@ -130,6 +131,15 @@ class PairPipe
 
     collision(player)
     {
+        if(this.top.x<player.x-PLAYER_RADIUS)
+        {
+            if(!this.isPointed)
+            {
+                Score.point();
+                this.isPointed=true;
+            }
+            return false;
+        }
         return this.top.collision(player)||this.bottom.collision(player);
     }
 }

@@ -13,6 +13,7 @@ function loop()
         player.move();
         bg.collision(player);
         player.draw();
+        Score.draw();
     }
 }
 
