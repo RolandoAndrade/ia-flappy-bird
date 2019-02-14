@@ -4,7 +4,7 @@ class Score
     {
         if(!Score.score)
             Score.score=0;
-        Score.score++;
+        Score.score+=99;
     }
 
     static draw()
@@ -13,7 +13,7 @@ class Score
             Score.score=0;
 
         let d=parseInt(Math.log10(Score.score)+1)||1;
-        let x=WIDTH/2-24;
+        let x=WIDTH/2+12*(d-1)-12;
         let s=Score.score;
         while(d>0)
         {
