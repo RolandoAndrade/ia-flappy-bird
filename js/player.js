@@ -28,9 +28,6 @@ class Player
         ctx.rotate(Math.min(this.speed*3, 90) * Math.PI / 180);
         ctx.drawImage(ImageLoader.getImage(BIRD_YELLOW),-this.w,-this.h);
         ctx.restore();
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, PLAYER_RADIUS, 0, 2 * Math.PI);
-        ctx.stroke();
     }
 
     kill(y)

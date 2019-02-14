@@ -24,8 +24,9 @@ class Land
     {
         if(player.y+PLAYER_RADIUS>=this.y)
             player.kill(this.y);
+        else if(player.y<=0)
+            player.kill(PLAYER_WIDTH);
         return !player.isAlive;
-
     }
 }
 
@@ -48,13 +49,24 @@ class Pipe
     draw()
     {
         ImageLoader.drawImage(this.getColor(),this.x,this.y,this.w,this.h);
-        ctx.strokeRect(this.x, this.y, this.w, this.h);
     }
 
     move(delta)
     {
         this.x-=delta;
         return this.x<-this.w;
+    }
+
+    verticalCollision(player)
+    {
+        return false;
+    }
+
+    collision(player)
+    {
+        if(this.x<=player.x+PLAYER_RADIUS&&player.x-PLAYER_RADIUS<=this.x+this.w&&this.verticalCollision(player))
+            player.kill(player.y+PLAYER_RADIUS);
+        return !player.isAlive;
     }
 }
 
@@ -69,6 +81,10 @@ class TopPipe extends Pipe
     {
         return super.getColor()[1];
     }
+    verticalCollision(player)
+    {
+        return this.y+this.h>=player.y-PLAYER_RADIUS;
+    }
 }
 
 class BottomPipe extends Pipe
@@ -76,6 +92,10 @@ class BottomPipe extends Pipe
     getColor()
     {
         return super.getColor()[0];
+    }
+    verticalCollision(player)
+    {
+        return this.y<=player.y+PLAYER_RADIUS;
     }
 }
 
@@ -106,6 +126,11 @@ class PairPipe
     random(min, max)
     {
         return Math.floor(Math.random() * (max - min))+min;
+    }
+
+    collision(player)
+    {
+        return this.top.collision(player)||this.bottom.collision(player);
     }
 }
 
@@ -153,7 +178,15 @@ class Background
 
     collision(player)
     {
-        return this.land[0].collision(player)||this.land[1].collision(player);
+        try
+        {
+            return this.land[0].collision(player)||this.land[1].collision(player)||this.pipes[0].collision(player)
+                ||this.pipes[1].collision(player);
+        }catch (e)
+        {
+            return false;
+        }
+
     }
 
 }
