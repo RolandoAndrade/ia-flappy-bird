@@ -70,6 +70,11 @@ class Game
     {
         ImageLoader.load();
         this.background=new Background();
+        this.players=[];
+        for(let i=0;i<10;i++)
+        {
+            this.players.push(new Player());
+        }
         this.player=new Player();
         this.init();
     }
@@ -80,14 +85,13 @@ class Game
 
     loop()
     {
-        if(this.player.isAlive)
-        {
-            this.background.draw();
-            this.player.move();
-            this.background.collision(this.player);
-            this.player.draw();
-            Score.draw();
-        }
+        this.background.draw();
+        this.player.move();
+        this.background.collision(this.player);
+        for(let i=0;i<this.players.length;i++)
+            this.players[i].draw();
+        this.player.draw();
+        Score.draw();
     }
 
     init()

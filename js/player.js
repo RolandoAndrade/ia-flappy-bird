@@ -20,13 +20,19 @@ class Player
 
     fly()
     {
-        this.speed=FLY_SPEED;
+        if(this.isAlive)
+            this.speed=FLY_SPEED;
     }
 
     move()
     {
-        this.y+=this.speed;
-        this.speed+=GRAVITY;
+        if (this.isAlive)
+        {
+            this.y += this.speed;
+            this.speed += GRAVITY;
+        }
+        else
+            this.x+=SCROLL_SPEED;
     }
 
     draw()

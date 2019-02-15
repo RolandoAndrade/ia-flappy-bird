@@ -20,6 +20,9 @@ const BIRD_BLUE=8;
 const BIRD_YELLOW=9;
 const NUMBERS_IMAGES=[10,11,12,13,14,15,16,17,18,19];
 
+
+const SCROLL_SPEED=-5;
+
 const PLAYER_RADIUS=12;
 const PLAYER_WIDTH=24;
 const PLAYER_INIT_X=WIDTH/2-PLAYER_WIDTH/2;
@@ -29,3 +32,12 @@ const GRAVITY=2;
 
 const SCORE_WIDTH=24;
 const SCORE_HEIGHT=44;
+
+const NODE_BIAS=1;
+const NODE_PIPE_DIS=2;
+const NODE_PIPE_UPPER=3;
+const NODE_PIPE2_UPPER=4;
+const NODE_OUTPUT=0;
+const INPUT_SIZE=4;
+const STEP_SIZE= 0.1; // The largest increment/decrement when changing the weight of an edge
+const MUTATION= 0.6;
