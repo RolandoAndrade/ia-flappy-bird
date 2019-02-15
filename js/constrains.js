@@ -34,10 +34,12 @@ const SCORE_WIDTH=24;
 const SCORE_HEIGHT=44;
 
 const NODE_BIAS=1;
-const NODE_PIPE_DIS=2;
+const NODE_PIPE_DISTANCE=2;
 const NODE_PIPE_UPPER=3;
 const NODE_PIPE2_UPPER=4;
 const NODE_OUTPUT=0;
 const INPUT_SIZE=4;
 const STEP_SIZE= 0.1; // The largest increment/decrement when changing the weight of an edge
 const MUTATION= 0.6;
+
+
