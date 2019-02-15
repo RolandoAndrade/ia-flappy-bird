@@ -8,6 +8,14 @@ class Player
         this.y=PLAYER_INIT_Y;
         this.isAlive=true;
         this.speed=0;
+
+        document.onkeydown = function (e) {
+            if(e.keyCode===38)
+                game.player.fly();
+        };
+        document.onclick = function () {
+            game.player.fly();
+        };
     }
 
     fly()
