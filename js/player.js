@@ -2,19 +2,23 @@ class Player
 {
     constructor()
     {
+        this.brain=new NeuronalNetwork();
+        this.meters=0;
+
+
         this.w=PLAYER_WIDTH;
         this.h=PLAYER_WIDTH;
         this.x=PLAYER_INIT_X;
         this.y=PLAYER_INIT_Y;
         this.isAlive=true;
         this.speed=0;
-
+        let a=this;
         document.onkeydown = function (e) {
             if(e.keyCode===38)
-                game.player.fly();
+                a.fly();
         };
         document.onclick = function () {
-            game.player.fly();
+            a.fly();
         };
     }
 
@@ -48,14 +52,5 @@ class Player
     {
         this.isAlive=false;
         this.y=y-PLAYER_RADIUS;
-    }
-
-    collision(x,y,w,h)
-    {
-        let minX=this.x-PLAYER_RADIUS;
-        let maxX=this.x+PLAYER_RADIUS;
-        let minY=this.y-PLAYER_RADIUS;
-        let maxY=this.y+PLAYER_RADIUS;
-        return minX<=x&&x<=maxX&&minY<=y&&y<=maxY;
     }
 }

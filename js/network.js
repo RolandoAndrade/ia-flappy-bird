@@ -48,7 +48,7 @@ class NeuronalNetwork
         // Check whether the two nodes are linked or not
         if (this.edges.hasOwnProperty(startNode) && this.edges[startNode].hasOwnProperty(endNode))
         {
-            if (Math.random() < 0.6) {
+            if (Math.random() < NEW_NODE_RATE) {
                 this.addNode(startNode, endNode);
             } else {
                 this.changeEdgeWeight(startNode, endNode);

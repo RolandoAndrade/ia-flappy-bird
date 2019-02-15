@@ -75,7 +75,7 @@ class Game
         {
             this.players.push(new Player());
         }
-        this.player=new Player();
+        //this.player=new Player();
         this.init();
     }
     gen()
@@ -86,17 +86,22 @@ class Game
     loop()
     {
         this.background.draw();
-        this.player.move();
-        this.background.collision(this.player);
+        //this.player.move();
+        //this.background.collision(this.player);
         for(let i=0;i<this.players.length;i++)
+        {
+            this.players[i].move();
+            this.background.collision(this.players[i]);
             this.players[i].draw();
-        this.player.draw();
+        }
+
+        //this.player.draw();
         Score.draw();
     }
 
     init()
     {
-
+        window.clearInterval();
         window.setInterval(this.loop.bind(this), 1000/20);
         window.setInterval(this.gen.bind(this), 2000);
     }
