@@ -141,6 +141,8 @@ class PairPipe
             if(!this.isPointed)
             {
                 Score.point();
+                this.top.color="GREEN";
+                this.bottom.color="GREEN";
                 this.isPointed=true;
             }
         }

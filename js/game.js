@@ -22,9 +22,14 @@ class Background
 
             if(this.pipes[0].move(delta))
                 this.pipes.shift();
+
             for(let i=1;i<this.pipes.length;i++)
-                this.pipes[i].move(delta)
-            this.pipes[1].color="R";
+                this.pipes[i].move(delta);
+
+            if(this.pipes[0].isPointed&&!this.pipes[1].isPointed)
+                this.pipes[1].focus();
+            else
+                this.pipes[2].focus();
         }
         catch (e)
         {
