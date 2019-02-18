@@ -104,16 +104,18 @@ class PairPipe
     constructor()
     {
         this.x=WIDTH;
-        let y=this.random(150,450);
-        this.top=new TopPipe(this.x,y-50,"GREEN");
-        this.bottom=new BottomPipe(this.x,y+50,"GREEN");
+        this.y=this.random(150,450);
+        this.top=new TopPipe(this.x,this.y-50,"GREEN");
+        this.bottom=new BottomPipe(this.x,this.y+50,"GREEN");
         this.isPointed=false;
     }
 
     move(delta)
     {
         this.top.move(delta);
+        this.x=this.top.x+PIPE_WIDTH+PLAYER_RADIUS;
         return this.bottom.move(delta);
+
     }
 
 
@@ -136,7 +138,7 @@ class PairPipe
 
     collision(player)
     {
-        if(this.top.x<player.x-PLAYER_RADIUS)
+        if(this.x<player.x)
         {
             if(!this.isPointed)
             {

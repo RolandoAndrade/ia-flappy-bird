@@ -4,13 +4,17 @@ class Background
     {
         this.land=[new Land(0), new Land(1)];
         this.pipes=[];
+        this.nextPipe;
     }
 
     generatePipe()
     {
         this.pipes.push(new PairPipe());
         if(this.pipes.length===1)
+        {
             this.pipes[0].focus();
+            this.nextPipe=this.pipes[0];
+        }
     }
 
     scroll(delta)
@@ -27,9 +31,16 @@ class Background
                 this.pipes[i].move(delta);
 
             if(this.pipes[0].isPointed&&!this.pipes[1].isPointed)
+            {
                 this.pipes[1].focus();
+                this.nextPipe=this.pipes[1];
+            }
             else
+            {
                 this.pipes[2].focus();
+                this.nextPipe=this.pipes[2];
+            }
+
         }
         catch (e)
         {
@@ -37,6 +48,11 @@ class Background
         }
 
 
+    }
+
+    getNextPipes()
+    {
+        return this.nextPipe;
     }
 
     draw()
@@ -69,40 +85,70 @@ class Game
     constructor()
     {
         ImageLoader.load();
-        this.background=new Background();
         this.players=[];
-        for(let i=0;i<10;i++)
+        for(let i=0;i<NUMBER_OF_PLAYERS;i++)
         {
             this.players.push(new Player());
         }
-        //this.player=new Player();
+        this.generation=new Generation(this.players);
+        this.restart();
+
+
         this.init();
+        let a=this;
+        document.onkeydown = function (e)
+        {
+            window.clearInterval(a.loopInterval);
+            window.clearInterval(a.pipeInterval);
+        };
     }
+
+
+    restart()
+    {
+        window.clearInterval();
+        this.background=new Background();
+        Score.score=0;
+    }
+
     gen()
     {
         this.background.generatePipe();
     }
 
+    checkGameOver(gameOver)
+    {
+        if(gameOver)
+        {
+            console.table(this.players);
+            this.players=this.generation.nextGeneration(this.players);
+            this.restart();
+        }
+
+
+    }
     loop()
     {
         this.background.draw();
-        //this.player.move();
-        //this.background.collision(this.player);
+        let gameOver=true;
+        let next=this.background.getNextPipes();
         for(let i=0;i<this.players.length;i++)
         {
+            this.players[i].fly(next);
             this.players[i].move();
             this.background.collision(this.players[i]);
             this.players[i].draw();
-        }
 
-        //this.player.draw();
+            if(this.players[i].isAlive)
+                gameOver=false;
+        }
         Score.draw();
+        this.checkGameOver(gameOver);
     }
 
     init()
     {
-        window.clearInterval();
-        window.setInterval(this.loop.bind(this), 1000/20);
-        window.setInterval(this.gen.bind(this), 2000);
+        this.loopInterval=window.setInterval(this.loop.bind(this), 1000/20);
+        this.pipeInterval=window.setInterval(this.gen.bind(this), 2000);
     }
 }

@@ -2,36 +2,46 @@ class Player
 {
     constructor()
     {
-        this.brain=new NeuronalNetwork();
-        this.meters=0;
+        this.DNA=new NeuronalNetwork();
 
 
         this.w=PLAYER_WIDTH;
         this.h=PLAYER_WIDTH;
-        this.x=PLAYER_INIT_X;
-        this.y=PLAYER_INIT_Y;
-        this.isAlive=true;
-        this.speed=0;
-        let a=this;
+        this.reset();
+        /*let a=this;
         document.onkeydown = function (e) {
             if(e.keyCode===38)
                 a.fly();
         };
         document.onclick = function () {
             a.fly();
-        };
+        };*/
     }
 
-    fly()
+    reset()
+    {
+        this.x=PLAYER_INIT_X;
+        this.y=PLAYER_INIT_Y;
+        this.meters=0;
+        this.isAlive=true;
+        this.speed=0;
+    }
+
+    fly(pipe)
     {
         if(this.isAlive)
-            this.speed=FLY_SPEED;
+        {
+            if(this.DNA.getOutput(pipe,this))
+                this.speed=FLY_SPEED;
+        }
+
     }
 
     move()
     {
         if (this.isAlive)
         {
+            this.meters++;
             this.y += this.speed;
             this.speed += GRAVITY;
         }
@@ -52,5 +62,10 @@ class Player
     {
         this.isAlive=false;
         this.y=y-PLAYER_RADIUS;
+    }
+
+    mutate()
+    {
+        this.DNA.mutate();
     }
 }

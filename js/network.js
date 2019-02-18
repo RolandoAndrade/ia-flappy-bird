@@ -5,7 +5,7 @@ class NeuronalNetwork
         this.nodeSize = INPUT_SIZE;
         this.nodes = [];
         this.edges = [];
-        this.activationFuntion=new DroppedTan();
+        this.activationFuntion=new Relu();
     }
 
     activate(x)
@@ -59,14 +59,22 @@ class NeuronalNetwork
             this.addEdge(startNode, endNode);
         }
     }
-    getOutput(pipeDistance, firstPipe, secondPipe)
+    getOutput(pipe, player)
     {
     // Initialize the value of nodes
         this.nodes[NODE_BIAS] = 1;
-        this.nodes[NODE_PIPE_DISTANCE] = pipeDistance;
-        this.nodes[NODE_PIPE_UPPER] = firstPipe;
-        this.nodes[NODE_PIPE2_UPPER] = secondPipe;
         this.nodes[NODE_OUTPUT] = 0;
+        try
+        {
+            this.nodes[NODE_PIPE_DISTANCE] = pipe.x-player.x;
+            this.nodes[NODE_PIPE_UPPER] = (pipe.y-player.y+PLAYER_RADIUS)/HEIGHT;
+        }
+        catch (e)
+        {
+            this.nodes[NODE_PIPE_DISTANCE] = WIDTH/2-player.x;
+            this.nodes[NODE_PIPE_UPPER] = (HEIGHT/2-player.y+PLAYER_RADIUS)/HEIGHT;
+        }
+
         for (let i = INPUT_SIZE + 1; i <= this.nodeSize; i++)
         {
             this.nodes[i] = 0;

@@ -25,7 +25,7 @@ class DroppedTan extends ActivationFunction
 {
     activate(x)
     {
-        return 2/(1+Math.exp(-4.9*x)-1)
+        return 2 / (1 + Math.exp(-4.9 * x)) - 1;
     }
 }
 

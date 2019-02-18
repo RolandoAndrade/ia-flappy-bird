@@ -42,8 +42,12 @@ const INPUT_SIZE=4;
 const STEP_SIZE= 0.1; // The largest increment/decrement when changing the weight of an edge
 const NEW_NODE_RATE= 0.6;
 
-const BIRD_NUM=10;
-const SURVIVOR_RATE=0.3;
-const MUTATION_RATE=0.5;
+
+const SURVIVOR_RATE=0.5;
+const MUTATION_RATE=0.6;
+
+
+const NUMBER_OF_PLAYERS=30;
+const PIPE_WIDTH=52;
 
 
