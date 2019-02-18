@@ -120,7 +120,6 @@ class Game
     {
         if(gameOver)
         {
-            console.table(this.players);
             this.players=this.generation.nextGeneration(this.players);
             this.restart();
         }

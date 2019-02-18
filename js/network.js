@@ -67,7 +67,7 @@ class NeuronalNetwork
         try
         {
             this.nodes[NODE_PIPE_DISTANCE] = pipe.x-player.x;
-            this.nodes[NODE_PIPE_UPPER] = (pipe.y-player.y+PLAYER_RADIUS)/HEIGHT;
+            this.nodes[NODE_PIPE_UPPER] = (pipe.y-player.y)/HEIGHT;
         }
         catch (e)
         {

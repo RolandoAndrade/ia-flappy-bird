@@ -43,11 +43,12 @@ const STEP_SIZE= 0.1; // The largest increment/decrement when changing the weigh
 const NEW_NODE_RATE= 0.6;
 
 
-const SURVIVOR_RATE=0.5;
-const MUTATION_RATE=0.6;
+const SURVIVOR_RATE=0.3;
+const MUTATION_RATE=0.7;
 
 
 const NUMBER_OF_PLAYERS=30;
 const PIPE_WIDTH=52;
+
 
 

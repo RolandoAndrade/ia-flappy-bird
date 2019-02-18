@@ -113,7 +113,7 @@ class PairPipe
     move(delta)
     {
         this.top.move(delta);
-        this.x=this.top.x+PIPE_WIDTH+PLAYER_RADIUS;
+        this.x=this.top.x+PIPE_WIDTH+PLAYER_RADIUS;//Overfitting with PIPE_WIDTH+PLAYER_RADIUS
         return this.bottom.move(delta);
 
     }

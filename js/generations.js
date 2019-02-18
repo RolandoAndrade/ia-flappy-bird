@@ -36,7 +36,6 @@ class Generation
             this.birds[i].init();
         }*/
         this.generation++;
-        console.table(this.players);
         return this.players;
     }
 
