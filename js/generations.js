@@ -11,7 +11,9 @@ class Generation
     nextGeneration(players)
     {
         this.players=players;
+
         this.players.sort(function(a, b) {return b.meters - a.meters});
+        GenerationViewer.draw(players,this.players[0].meters);
         console.table(this.players);
 
         for (let i = 0; i < NUMBER_OF_PLAYERS-this.survivors; i++)

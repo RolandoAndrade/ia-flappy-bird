@@ -100,7 +100,7 @@ class Game
         let a=this;
         document.onkeydown = function (e)
         {
-            a.clearTime();
+            a.kill();
         };
     }
 
@@ -159,9 +159,15 @@ class Game
         this.init();
     }
 
+    kill()
+    {
+        for(let i=0;i<this.players.length;i++)
+            this.players[i].kill(0);
+    }
+
     init()
     {
-        this.loopInterval=window.setInterval(this.loop.bind(this), this.loopTime);
-        this.pipeInterval=window.setInterval(this.gen.bind(this), this.pipesTime);
+        this.loopInterval=window.setInterval(this.loop.bind(this), this.loopTime/5);
+        this.pipeInterval=window.setInterval(this.gen.bind(this), this.pipesTime/5);
     }
 }
