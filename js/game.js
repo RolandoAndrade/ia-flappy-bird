@@ -84,6 +84,8 @@ class Game
 {
     constructor()
     {
+        this.loopTime=1000/20;
+        this.pipesTime=2000;
         ImageLoader.load();
         this.players=[];
         for(let i=0;i<NUMBER_OF_PLAYERS;i++)
@@ -98,8 +100,7 @@ class Game
         let a=this;
         document.onkeydown = function (e)
         {
-            window.clearInterval(a.loopInterval);
-            window.clearInterval(a.pipeInterval);
+            a.clearTime();
         };
     }
 
@@ -144,10 +145,23 @@ class Game
         Score.draw();
         this.checkGameOver(gameOver);
     }
+    clearTime()
+    {
+        window.clearInterval(this.loopInterval);
+        window.clearInterval(this.pipeInterval);
+    }
+
+    setTime(x)
+    {
+        this.clearTime();
+        this.loopTime/=x;
+        this.pipesTime/=x;
+        this.init();
+    }
 
     init()
     {
-        this.loopInterval=window.setInterval(this.loop.bind(this), 1000/20);
-        this.pipeInterval=window.setInterval(this.gen.bind(this), 2000);
+        this.loopInterval=window.setInterval(this.loop.bind(this), this.loopTime);
+        this.pipeInterval=window.setInterval(this.gen.bind(this), this.pipesTime);
     }
 }

@@ -7,6 +7,7 @@ class Player
 
         this.w=PLAYER_WIDTH;
         this.h=PLAYER_WIDTH;
+        this.color=BIRD_YELLOW;
         this.reset();
         /*let a=this;
         document.onkeydown = function (e) {
@@ -24,7 +25,7 @@ class Player
         this.y=PLAYER_INIT_Y;
         this.meters=0;
         this.isAlive=true;
-        this.speed=0;
+        this.speed=Math.floor(Math.random() * 20)-10;
     }
 
     fly(pipe)
@@ -54,7 +55,7 @@ class Player
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(Math.min(this.speed*3, 90) * Math.PI / 180);
-        ctx.drawImage(ImageLoader.getImage(BIRD_YELLOW),-this.w,-this.h);
+        ctx.drawImage(ImageLoader.getImage(this.color),-this.w,-this.h);
         ctx.restore();
     }
 
@@ -67,5 +68,15 @@ class Player
     mutate()
     {
         this.DNA.mutate();
+    }
+
+    first()
+    {
+        this.color=BIRD_RED;
+    }
+
+    past()
+    {
+        this.color=BIRD_BLUE;
     }
 }

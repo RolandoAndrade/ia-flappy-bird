@@ -30,7 +30,10 @@ class Generation
         for (let i = 0; i<this.survivors; i++)
         {
             this.players[i].reset();
+            this.players[i].past();
         }
+        this.players[0].first();
+        console.log(this.players[0].DNA.nodes);
         /*for (let i = 0; i < this.survivors; i++)
         {
             this.birds[i].init();

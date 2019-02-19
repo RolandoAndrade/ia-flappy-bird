@@ -74,8 +74,7 @@ class NeuronalNetwork
             this.nodes[NODE_PIPE_DISTANCE] = WIDTH/2-player.x;
             this.nodes[NODE_PIPE_UPPER] = (HEIGHT/2-player.y+PLAYER_RADIUS)/HEIGHT;
         }
-
-        for (let i = INPUT_SIZE + 1; i <= this.nodeSize; i++)
+        for (let i = INPUT_SIZE; i < this.nodeSize; i++)
         {
             this.nodes[i] = 0;
         }
@@ -95,3 +94,20 @@ class NeuronalNetwork
     }
 
 }
+
+/*edges: Array(5)
+1: [-0.027244421867331337]
+2: []
+3: [-0.6778135929440219]
+4: []
+length: 5
+__proto__: Array(0)
+nodeSize: 4
+nodes: Array(4)
+0: -0.0396710044046384
+1: 1
+2: 121
+3: 0.018333333333333333
+length: 4
+__proto__: Array(0)
+__proto__: Object*/
